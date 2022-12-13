@@ -1,28 +1,30 @@
 package pgdp.pools;
 
+import java.util.Objects;
 import java.util.function.Function;
 
 public class TaskFunction<T, R> {
 
+	private final int ID = 0;
+	private final Function<T, R> function;
+
 	public TaskFunction(Function<T, R> function) {
-		// TODO
+		// TODO wie bekommt die erste Instanz ID = 0 die zweite ID = 1 usw
+		this.function = function;
 	}
 
 	public R apply(T input) {
-		// TODO
-		return null;
+		return function.apply(input);
 	}
 
 	@Override
 	public int hashCode() {
-		// TODO
-		return 0;
+		return Objects.hash(ID);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		// TODO
-		return false;
+		return obj.equals(ID);
 	}
 
 	public static void main(String[] args) {

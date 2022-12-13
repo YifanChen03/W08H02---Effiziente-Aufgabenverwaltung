@@ -1,6 +1,9 @@
 package pgdp.pools;
 
+import java.util.HashMap;
+
 public class TaskPool<T, R> {
+	private HashMap<String, Task> tasks_hm = new HashMap<String, Task>();
 
 	protected TaskPool() {
 		// TODO ?
@@ -8,11 +11,16 @@ public class TaskPool<T, R> {
 
 	public Task<T, R> insert(Task<T, R> task) {
 		// TODO
-		return null;
+		if (tasks_hm.containsValue(task)) {
+			return task;
+		}
+		return task;
 	}
 
 	public Task<T, R> getByValue(T input, TaskFunction<T, R> function) {
 		// TODO
+
+
 		return null;
 	}
 

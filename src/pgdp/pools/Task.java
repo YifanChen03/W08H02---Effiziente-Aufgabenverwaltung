@@ -1,26 +1,43 @@
 package pgdp.pools;
 
+import java.util.Objects;
+
 public class Task<T, R> {
+	private final T input;
+	private R result;
+	private final TaskFunction<T, R> taskFunction;
 
 	protected Task(T input, TaskFunction<T, R> taskFunction) {
 		// TODO
+		this.input = input;
+		this.taskFunction = taskFunction;
 	}
 
 	public R getResult() {
 		// TODO
-		return null;
+		result = this.taskFunction.apply(this.input);
+		return result;
 	}
 
 	@Override
 	public int hashCode() {
 		// TODO
-		return 0;
+		return Objects.hash(input, taskFunction);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		// TODO
-		return false;
+		return obj.hashCode() == this.hashCode();
+	}
+
+	//Getter
+	public T getInput() {
+		return input;
+	}
+
+	public TaskFunction<T, R> getTaskFunction() {
+		return taskFunction;
 	}
 
 	public static void main(String[] args) {
