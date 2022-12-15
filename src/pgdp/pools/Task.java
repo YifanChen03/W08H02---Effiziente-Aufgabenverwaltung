@@ -15,7 +15,8 @@ public class Task<T, R> {
 
 	public R getResult() {
 		// TODO
-		result = this.taskFunction.apply(this.input);
+		if (result == null)
+		result = taskFunction.apply(input);
 		return result;
 	}
 

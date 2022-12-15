@@ -25,7 +25,7 @@ public class TaskPool<T, R> {
 		// TODO
 		for (Map.Entry<Task, Task> meta : tasks_hm.entrySet()) {
 			Task a_task = meta.getValue();
-			if (a_task.getInput() == input && a_task.getTaskFunction() == function) {
+			if (a_task.getInput().equals(input) && a_task.getTaskFunction().equals(function)) {
 				return a_task;
 			}
 		}
