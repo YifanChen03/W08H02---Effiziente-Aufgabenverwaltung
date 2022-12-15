@@ -1,26 +1,34 @@
 package pgdp.pools;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class TaskPool<T, R> {
-	private HashMap<String, Task> tasks_hm = new HashMap<String, Task>();
+	private HashMap<Task, Task> tasks_hm;
 
 	protected TaskPool() {
 		// TODO ?
+		tasks_hm = new HashMap<>();
 	}
 
 	public Task<T, R> insert(Task<T, R> task) {
 		// TODO
 		if (tasks_hm.containsValue(task)) {
-			return task;
+			return tasks_hm.get(task);
 		}
-		return task;
+		tasks_hm.put(task, task);
+		return tasks_hm.get(task);
 	}
 
 	public Task<T, R> getByValue(T input, TaskFunction<T, R> function) {
 		// TODO
-
-
+		for (Map.Entry<Task, Task> meta : tasks_hm.entrySet()) {
+			Task a_task = meta.getValue();
+			if (a_task.getInput() == input && a_task.getTaskFunction() == function) {
+				return a_task;
+			}
+		}
 		return null;
 	}
 

@@ -1,19 +1,26 @@
 package pgdp.pools;
 
 public class TaskFactory<T, R> {
+	private final TaskPool<T, R> pool;
 
 	public TaskFactory() {
 		// TODO ?
+		pool = new TaskPool<>();
 	}
 
 	public Task<T, R> create(T input, TaskFunction<T, R> function) {
 		// TODO
-		return null;
+		if (pool.getByValue(input, function) == null) {
+			//keine task vorhanden
+			pool.insert(new Task<>(input, function));
+			return pool.getByValue(input, function);
+		}
+		return pool.getByValue(input, function);
 	}
 
 	public Task<T, R> intern(Task<T, R> task) {
 		// TODO
-		return null;
+		return pool.insert(task);
 	}
 
 	public static void main(String[] args) {

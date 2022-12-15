@@ -28,7 +28,15 @@ public class Task<T, R> {
 	@Override
 	public boolean equals(Object obj) {
 		// TODO
-		return obj.hashCode() == this.hashCode();
+		//Code aus w08p03 tuple.java
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null || getClass() != obj.getClass()) {
+			return false;
+		}
+		Task<?, ?> ta = (Task<?, ?>) obj;
+		return Objects.equals(input, ta.getInput()) && Objects.equals(taskFunction, ta.getTaskFunction());
 	}
 
 	//Getter

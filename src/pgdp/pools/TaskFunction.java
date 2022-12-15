@@ -4,13 +4,14 @@ import java.util.Objects;
 import java.util.function.Function;
 
 public class TaskFunction<T, R> {
-
-	private final int ID = 0;
+	private static int count;
+	private final int ID;
 	private final Function<T, R> function;
 
 	public TaskFunction(Function<T, R> function) {
 		// TODO wie bekommt die erste Instanz ID = 0 die zweite ID = 1 usw
 		this.function = function;
+		this.ID = count++;
 	}
 
 	public R apply(T input) {
@@ -24,7 +25,15 @@ public class TaskFunction<T, R> {
 
 	@Override
 	public boolean equals(Object obj) {
-		return obj.equals(ID);
+		//Code aus w08p03 tuple.java
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null || getClass() != obj.getClass()) {
+			return false;
+		}
+		TaskFunction<?, ?> tafu = (TaskFunction<?, ?>) obj;
+		return Objects.equals(ID, tafu.ID);
 	}
 
 	public static void main(String[] args) {
